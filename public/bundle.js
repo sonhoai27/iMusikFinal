@@ -15577,7 +15577,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var updateLikeSong = function updateLikeSong(id) {
-  return fetch('http://localhost:3000/getDiscover/updateLikeSong/' + id) // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover/updateLikeSong/' + id) // eslint-disable-line
   .then(function (res) {
     return res.text();
   }).catch(function (err) {
@@ -22014,7 +22014,7 @@ Object.defineProperty(exports, "__esModule", {
 var $ = __webpack_require__(35);
 
 var CheckLogin = function CheckLogin(cb) {
-    $.get('http://localhost:3000/login/check', function (text) {
+    $.get('https://imusik.herokuapp.com/login/check', function (text) {
         // if (text.ROI === 'ROI') return cb(text);
         if (text === 'ROI') return cb(true);
         return cb(false);
@@ -22034,7 +22034,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var GetDiscover = function GetDiscover() {
-  return fetch('http://localhost:3000/getDiscover') // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover') // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22055,7 +22055,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var GetDiscover = function GetDiscover(trang) {
-  return fetch('http://localhost:3000/getDiscover/morediscover/' + trang) // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover/morediscover/' + trang) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22076,7 +22076,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var LayDiscoverOfSinger = function LayDiscoverOfSinger(id) {
-  return fetch('http://localhost:3000/getDiscover/LayDiscoverOfSinger/' + id) // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover/LayDiscoverOfSinger/' + id) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22100,7 +22100,7 @@ var $ = __webpack_require__(35);
 
 var dangNhap = function dangNhap(username, password, cb) {
     var data = { username: username, password: password };
-    $.post('http://localhost:3000/login', data, function (text) {
+    $.post('https://imusik.herokuapp.com/login', data, function (text) {
         if (text == 'THANHCONG') return cb('THANHCONG');
         cb('THATBAI');
     });
@@ -22119,7 +22119,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var GetAllSongOfDiscover = function GetAllSongOfDiscover(id) {
-  return fetch('http://localhost:3000/getDiscover/getSongFromDiscover/' + id) // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover/getSongFromDiscover/' + id) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22140,7 +22140,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getHotDiscover = function getHotDiscover() {
-  return fetch('http://localhost:3000/getDiscover/getHotDiscover/') // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover/getHotDiscover/') // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22161,7 +22161,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getHotSinger = function getHotSinger() {
-  return fetch('http://localhost:3000/getDiscover/getHotSinger/') // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover/getHotSinger/') // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22182,7 +22182,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getHotSong = function getHotSong() {
-  return fetch('http://localhost:3000/getDiscover/getHotSong/') // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover/getHotSong/') // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22203,7 +22203,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getOneDiscover = function getOneDiscover(id) {
-  return fetch('http://localhost:3000/getDiscover/getOneDiscover/' + id) // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover/getOneDiscover/' + id) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22224,7 +22224,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getOneSinger = function getOneSinger(id) {
-  return fetch('http://localhost:3000/getDiscover/getOneSinger/' + id) // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover/getOneSinger/' + id) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22245,7 +22245,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getSongOfSinger = function getSongOfSinger(id) {
-  return fetch('http://localhost:3000/getDiscover/getSongOfSinger/' + id) // eslint-disable-line
+  return fetch('https://imusik.herokuapp.com/getDiscover/getSongOfSinger/' + id) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
