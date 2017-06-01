@@ -1,0 +1,91 @@
+  <script>
+    var trang = 1
+    $(document).ready(() => {
+
+      $('#btnLoad').click((e) => {
+        e.preventDefault();
+        trang = trang + 1;
+        $.get(`/Dashboard/morediscover/${trang}`, data => {
+          console.log("trang: ", trang)
+          console.log(data);
+          $('#table-discover').append(data);
+        });
+      });
+
+      $('.timkiem').keyup((e) => {
+        e.preventDefault();
+        $('#ul-song').html(`Loading...`);
+        const val = $('#timnhac').val()
+        var txt = '';
+        for (var c = 0; c < val.length; c++) {
+          if (c == 0 && val[c] != '') {
+            txt += val[c].toUpperCase()
+          } else {
+            if (val[c - 1] == ' ') {
+              txt += val[c].toUpperCase()
+            } else {
+              txt += val[c]
+            }
+          }
+        }
+        $('#timnhac').val(txt)
+        $.post(`/Dashboard/TimBaiHat/`, $('#timnhac'), data => {
+          if (data == []) {
+            $('#ul-song').html(`Không có`);
+          } else {
+            console.log(data);
+            $('#ul-song').html(data);
+          }
+        });
+      })
+
+      $('#Song-Tab').click((e) => {
+        e.preventDefault();
+        $.get(`/Dashboard/song/`, data => {
+          console.log(data);
+          $('#content-layout').html(data);
+          $('#Song-Tab').addClass('active');
+           $('#Discover-tab').removeClass('active');
+        });
+      })
+
+    });
+  </script>
+<div class="col-sm-12" style=" box-shadow: 1px 1px 10px #eee;">
+    <div class="header-discover">
+        <span class="pull-left title-all-discover">Tất cả bài hát</span>
+        <button class="btn btn-default pull-right btn-add-discover" data-toggle="modal" data-target="#addSong" data-backdrop="static">
+            <i class="glyphicon glyphicon-plus-sign"></i>
+          </button>
+    </div>
+    <div class="col-xs-12">
+      <form action="/go" method="post" class="col-xs-6 col-xs-offset-3 styles-search">
+        <input type="text" class="form-control search-discover" placeholder="Type to Search..." style="position: relative;">
+      </form>
+    </div>
+    <div class="content-list-discover">
+        <div id="table-discover">
+            <% info.forEach((e)=>{%>
+                <div class="col-xs-12 col-sm-3" style="padding-top: 10px; border-bottom: 1px solid #ddd">
+                    <div class="col-sm-6 col-xs-4">
+                        <img src="<%=e.Image%>" alt="" class="imgimg-responsive " width="100%">
+                    </div>
+                    <div class="col-sm-6 col-xs-8">
+                        <h4>
+                            <%=e.Name%>
+                        </h4>
+                    </div>
+                    <div class="col-xs-12" style="padding: 10px;">
+                        <div class="btn btn-default btn-update-dis"><a href="/dashboard/updatesong/<%=e.Id%>">Sửa</a></div>
+                        <div class="btn btn-default"><a href="/dashboard/deletesong/<%=e.Id%>">Xóa</a></div>
+                    </div>
+                </div>
+                <%} )%>
+        </div>
+        <!--<div>
+            <div class="col-xs-6 col-xs-offset-5" style="margin-top: 26px; padding-bottom: 26px;">
+                <span class="button" id="btnLoad" onclick="console.log('load');">More</span>
+            </div>
+        </div>-->
+    </div>
+</div>

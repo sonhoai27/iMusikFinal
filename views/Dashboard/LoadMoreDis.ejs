@@ -1,0 +1,17 @@
+<% info.forEach((e)=>{%>
+  <div class="col-xs-12 col-sm-3" style="padding-top: 10px; border-bottom: 1px solid #ddd">
+    <div class="col-sm-6 col-xs-4">
+      <img src="<%=e.ImageD%>" alt="" class="imgimg-responsive " width="100%">
+    </div>
+    <div class="col-sm-6 col-xs-8">
+      <%=e.NameD%>
+    </div>
+    <div class="col-xs-12" style="padding: 10px;">
+      <div class="btn btn-default"><a href="dashboard/updatediscover/<%=e.IdD%>">Sửa</a></div>
+      <div class="btn btn-default"><a href="/dashboard/deletediscover/<%=e.IdD%>">Xóa</a></div>
+    </div>
+    <div id="capnhatD<%=e.IdD%>">
+
+    </div>
+  </div>
+  <%} )%>

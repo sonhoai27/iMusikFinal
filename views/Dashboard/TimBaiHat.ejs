@@ -1,0 +1,37 @@
+<body>
+    <% info.forEach((e)=>{%>
+        <% idCuoiDiscover = parseInt(IdCuoi.IdD) + 1 %>
+        <% IdSong = parseInt(e.idDiscover)%>
+        <script>
+            $(document).ready(() => {
+                $('#event-add-<%=e.Id%>').click((e) => {
+                    e.preventDefault();
+                    $.get(`/dashboard/addSongToDiscover/<%= e.Id%>`, data => {
+                        $('#event-add-<%=e.Id%>').html(`Đã Thêm`)
+                    });
+                });
+            })
+            
+            if("<%=idCuoiDiscover%>" == "<%=IdSong%>"){
+                console.log("Bang")
+            }
+        </script>
+        <div class="list-song col-xs-6" style="padding-left: 0">
+            <li>
+                <span class="name-song-discover">
+            <%=e.Name%>
+        </span>
+
+                <span class="add-discover"><a id="event-add-<%=e.Id%>">
+                    <%
+                   if(idCuoiDiscover == IdSong){
+                       %>Đã Thêm<%
+                   }else{
+                       %>Thêm<%
+                   }
+                    %>
+                </a></span>
+            </li>
+        </div>
+        <%})%>
+</body>

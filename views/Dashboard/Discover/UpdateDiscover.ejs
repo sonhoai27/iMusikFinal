@@ -1,0 +1,149 @@
+<html>
+
+<head>
+    <base href="../">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cập nhật discover</title>
+    <link href="style/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <style type="text/css">
+        .contact-form {
+            margin-top: 15px;
+        }
+
+        .contact-form .textarea {
+            min-height: 220px;
+            resize: none;
+        }
+
+        .form-control {
+            box-shadow: none;
+            border-color: #eee;
+            height: 49px;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #0366d6;
+        }
+
+        .form-control-feedback {
+            line-height: 50px;
+        }
+
+        .main-btn {
+            background: #0366d6;
+            border-color: #0366d6;
+            color: #fff;
+        }
+
+        .main-btn:hover {
+            background: #00a491;
+            color: #fff;
+        }
+
+        .form-control-feedback {
+            line-height: 50px;
+            top: 0px;
+        }
+    </style>
+    <script>
+        $(document).ready(() => {
+            $('.timkiem').keyup((e) => {
+                e.preventDefault();
+                $('#ul-song').html(`Loading...`);
+                const val = $('#timnhac').val()
+                var txt = '';
+                for (var c = 0; c < val.length; c++) {
+                    if (c == 0 && val[c] != '') {
+                        txt += val[c].toUpperCase()
+                    } else {
+                        if (val[c - 1] == ' ') {
+                            txt += val[c].toUpperCase()
+                        } else {
+                            txt += val[c]
+                        }
+                    }
+                }
+                var idDiscover = $('#IdD').val()
+                var thamso = {'ten': txt, 'idDiscover': idDiscover}
+                console.log(thamso)
+                $('#timnhac').val(txt)
+                $.post(`/Dashboard/timnhac`, thamso, data => {
+                    if (data == []) {
+                        $('#ul-song').html(`Không có`);
+                    } else {
+                        console.log(data);
+                        $('#ul-song').html(data);
+                    }
+                });
+            })
+
+            $('#Song-Tab').click((e) => {
+                e.preventDefault();
+                $.get(`/Dashboard/song/`, data => {
+                    console.log(data);
+                    $('#content-layout').html(data);
+                    $('#Song-Tab').addClass('active');
+                    $('#Discover-tab').removeClass('active');
+                });
+            })
+
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <%result.forEach(e => { %>
+                <form role="form" id="contact-form" class="contact-form" method="POST" action="/dashboard/updatediscover/<%=e.IdD%>">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Name" autocomplete="off" id="Name" placeholder="Name" value="<%=e.NameD%>"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <textarea class="form-control textarea" rows="3" name="Desc" id="Desc" placeholder="<%=e.DescD%>" value="<%=e.DescD%>"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <label>Thêm Bài Hát: </label>
+                            <div class="timkiem">
+                                <input type="text" class="form-control input-tim"  name="IdDiscover" id="IdD" value="<%=e.IdD%>" style="display: none">
+                                <input type="text" class="form-control input-tim" placeholder="Nhập tên bài hát..." name="ten" id="timnhac" value="">
+                            </div>
+                            <ul id="ul-song" class="col-xs-12" style="list-style-type: none; padding-top: 10px">
+                                <div class="list-song">
+                                    <li>Kết quả tìm kiếm:</li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn main-btn pull-right">Cập Nhật</button>
+                        </div>
+                    </div>
+                </form>
+                <%})%>
+        </div>
+    </div>
+</body>
+</head>
+
+</html>

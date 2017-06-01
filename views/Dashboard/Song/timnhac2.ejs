@@ -1,0 +1,36 @@
+<body>
+    <% info.forEach((e)=>{%>
+        <% idDis = idDiscover%>
+        <% IdSong = parseInt(e.Id)%>
+        <script>
+            $(document).ready(() => {
+                $('#event-add-<%=e.Id%>').click((e) => {
+                    e.preventDefault();
+                    var obj = {'IdD': '<%=idDis%>', 'IdS': '<%=e.Id%>'}
+                    $.post(`/dashboard/updateIdDiscoverOfSong/`,obj, data => {
+                        $('#event-add-<%=e.Id%>').html(`Đã Thêm`)
+                    });
+                });
+            })
+            
+            console.log('<%=idDis%>', '<%=IdSong%>' )
+        </script>
+        <div class="list-song col-xs-6" style="padding-left: 0">
+            <li>
+                <span class="name-song-discover">
+            <%=e.Name%>
+        </span>
+
+                <span class="add-discover button"><a id="event-add-<%=e.Id%>">
+                    <%
+                   if(idDis == IdSong){
+                       %>Đã Thêm<%
+                   }else{
+                       %>Thêm<%
+                   }
+                    %>
+                </a></span>
+            </li>
+        </div>
+        <%})%>
+</body>
