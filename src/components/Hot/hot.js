@@ -14,7 +14,7 @@ const Hot = () => (
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-sm-6">
+                    <div className="col-sm-6"  style={{marginTop: 20}}>
                         <div className="area">
                             <a href to="/hot/1">
                             <div className="mask">
