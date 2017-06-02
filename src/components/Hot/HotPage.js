@@ -140,7 +140,7 @@ export default class HotPage extends Component {
                                 <div className="title-iMusik-Charts">
                                     <p>iMusik Charts</p>
                                 </div>
-                                <div className="show-Charts col-xs-12">
+                                <div className="show-Charts col-xs-12" style={{marginTop: 20}}>
                                     <div className="col-xs-12">
                                         <div className="area">
                                             <a href="/hot/1">

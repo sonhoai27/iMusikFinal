@@ -23077,7 +23077,7 @@ var HotPage = function (_Component) {
                                 ),
                                 _react2.default.createElement(
                                     'div',
-                                    { className: 'show-Charts col-xs-12' },
+                                    { className: 'show-Charts col-xs-12', style: { marginTop: 20 } },
                                     _react2.default.createElement(
                                         'div',
                                         { className: 'col-xs-12' },
