@@ -18,7 +18,7 @@ export default class OneDiscover extends Component {
                     </div>
                     <img src={this.props.Image} alt={this.props.NameDiscover} className="img-responsive" />
                 </div>
-                    <h4 style={{marginTop: '16px'}}>{this.props.NameDiscover}</h4></a>
+                    <h4 style={{marginTop: '16px', fontSize: 16, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{this.props.NameDiscover}</h4></a>
                     <span><a href={linkSinger}>{this.props.NameSinger}</a></span>
             </div>
         )

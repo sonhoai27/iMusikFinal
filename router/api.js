@@ -6,7 +6,7 @@ const {queryDB,
 	getHotDiscover, getHotSong,
 	getHotSinger, getOneSinger,
 	getSongOfSinger, LayDiscoverOfSinger,
-	updateLikeSong} = require('../controllers/db')
+	updateLikeSong, GetTopNewSong} = require('../controllers/db')
 
 router.get('/', (req, res) => {
     LayDiscover(0)
@@ -80,5 +80,10 @@ router.get('/updateLikeSong/:id', (req, res) => {
 	.then(info => {
 		res.send(info.toString())})
 	.catch( err => console.log(err))
+})
+router.get('/topnewsong', (req, res) => {
+	GetTopNewSong()
+	.then(kq => res.send(kq))
+	.catch(err => console.log(err + ''))
 })
 module.exports = router

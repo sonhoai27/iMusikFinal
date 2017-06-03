@@ -14,7 +14,12 @@ export default class OneSinger extends Component {
                         </div>
                     </div>
                     <img src={this.props.ImageS} alt="" className="img-responsive" />
-                    <h4>{this.props.NameS}</h4>
+                    <h5
+                        style={{fontSize: this.props.FontSizeTitle, paddingTop: this.props.paddingTopTitle}}>
+                        {this.props.NameS}
+                        <br/>
+                        <p className="fa fa-thumbs-up" style={{display: this.props.ShowLike}}> </p>{this.props.LikeS}
+                    </h5>
                 </div>
             </a>
         )

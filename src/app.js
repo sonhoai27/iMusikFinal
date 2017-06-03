@@ -16,6 +16,7 @@ import Intro from "./components/Intro/Intro"
 import Login from "./components/Login/Login"
 import CheckLogin from "./api/CheckLogin"
 
+
 class Home extends Component {
     render() {
         return (
@@ -34,11 +35,16 @@ class Home extends Component {
 }
 
 const DefaultComponent = ({ location }) => (
-    <div className="container">
+    <div className="container"  style={{marginTop: 140, marginBottom: 180}}> 
         <div className="row">
+            <div className="col-sm-2 col-sm-offset-5 col-xs-6 col-xs-offset-3" style={{marginBottom: 50}}>
+                <img src="images/Icon/fall.png" alt="" width="100%"/>
+            </div>
             <h1 className="col-xs-12 text-center">
-                KHONG TON TAI<br />TRANG: "<code>{location.pathname}</code>"
+                Trang này không khả dụng
             </h1>
+            <h4 className="col-xs-12 text-center" style={{paddingTop: 10}}>Liên kết bạn truy cập có thể bị hỏng hoặc trang có thể đã bị xóa.</h4>
+            <h4 className="col-xs-12 text-center" style={{paddingTop: 50, color: '#08f'}}><a href="/">Home page</a></h4>
         </div>
     </div>
 )

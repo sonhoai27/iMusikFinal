@@ -64,8 +64,8 @@ export default class SingerPage extends Component {
         })
     }
     updateLikeSong(id) {
-        $.get('/getDiscover/updateLikeSong/' + id, data => {
-            $('#like-song' + data - 1).html(data)
+        $.get('/api/updateLikeSong/' + id, data => {
+            $('#like-song' + id).html(data)
         })
 
     }
@@ -88,7 +88,7 @@ export default class SingerPage extends Component {
                             <h4><b>{e.Name}</b></h4>
                         </div>
                         <div className="luot-nghe">
-                            <h4 className="fa fa-thumbs-up" id={'like-song' + e.Like} aria-hidden="true" onClick={() => this.updateLikeSong(e.Id)}> {e.Like}</h4>
+                            <h4 className="fa fa-thumbs-up" id={'like-song' + e.Id} aria-hidden="true" onClick={() => this.updateLikeSong(e.Id)}> {e.Like}</h4>
                         </div>
                     </li>
                 ))}
@@ -140,20 +140,20 @@ export default class SingerPage extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="container">
+                <div className="container" style={{backgroundColor: '#f9f9f9'}}>
                     <div className="row">
-                        <div className="col-sm-8 ccol-xs-12">
+                        <div className="col-sm-8 col-xs-12" style={{backgroundColor: '#fff', paddingTop: 20}}>
                             <div>
-                                <div className="title-song-singer text-center">
-                                    <h2>Top Songs By {this.state.TenCaSi}</h2>
+                                <div className="title-song-singer">
+                                    <h2 style={{color: '#08f'}}>Top Songs By {this.state.TenCaSi}</h2>
                                     <hr />
                                 </div>
                                 <div className="content-song">
                                     {renderSong}
                                 </div>
                             </div>
-                            <div className="Discover">
-                                <h2 className=" text-center">Top Discovers By {this.state.TenCaSi}</h2>
+                            <div className="Discover" style={{paddingTop: 30}}>
+                                <h2 className="top-discover-by" style={{color: '#08f'}}>Top Discovers By {this.state.TenCaSi}</h2>
                                 {this.state.mangDiscover.map(e => (
                                     <div className="col-xs-6 col-sm-4" key={e.IdD} style={{marginTop: 26}}>
                                         <OneDiscover
@@ -169,8 +169,8 @@ export default class SingerPage extends Component {
                                 ))}
                             </div>
                         </div>
-                        <div className="col-sm-4 col-xs-12">
-                            <h2 className="text-center">Recent Posts</h2>
+                        <div className="col-sm-4 col-xs-12"  style={{paddingTop: 20}}>
+                            <h2 className="recent-posts"  style={{color: '#08f', paddingLeft: 15}}>Recent Posts</h2>
                             <div className="recent-post">
                                 <h5 className="title-recent-post">By {this.state.TenCaSi}</h5>
                                 <hr />
@@ -208,5 +208,6 @@ const styles = {
         marginBottom: 20,
         paddingBottom: 30,
         backgroundImage: 'url(https://goo.gl/xbvqOA)',
+        marginTop: 95,
     },
 }

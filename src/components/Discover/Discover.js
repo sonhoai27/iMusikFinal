@@ -38,14 +38,14 @@ export default class Discover extends Component {
             <div className="container" style={styles.paddingBottomDiscover}>
                 <div className="row">
                     <div className="col-xs-12">
-                        <div className="title-popular-artists text-center">
-                            <h2>Discovers</h2>
+                        <div className="title-popular-artists text-left">
+                            <h2>Albums</h2>
                             <p>Based On Artists Everyone Listened</p>
                         </div>
                         <hr />
                     </div>
                     {this.state.mang.map(e =>
-                        <div className="col-xs-6 col-sm-4 col-md-3 col-lg-2 video" style={styles.marinBottomOneDiscover} key={e.IdD}>
+                        <div className="col-xs-6 col-sm-4 col-lg-2 video" style={styles.marinBottomOneDiscover} key={e.IdD}>
                             <OneDiscover NameDiscover={e.NameD}
                                 NameSinger={e.NameS}
                                 Image={e.ImageD}
@@ -69,6 +69,7 @@ export default class Discover extends Component {
 const styles = {
     paddingBottomDiscover: {
         paddingBottom: 80,
+        paddingTop: 50
     },
     paddingTopBtn: {
         marginTop: 50,

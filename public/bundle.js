@@ -3805,7 +3805,7 @@ var OneDiscover = function (_Component) {
                     ),
                     _react2.default.createElement(
                         'h4',
-                        { style: { marginTop: '16px' } },
+                        { style: { marginTop: '16px', fontSize: 16, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' } },
                         this.props.NameDiscover
                     )
                 ),
@@ -15577,7 +15577,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var updateLikeSong = function updateLikeSong(id) {
-  return fetch('https://imusik.herokuapp.com/getDiscover/updateLikeSong/' + id) // eslint-disable-line
+  return fetch('http://localhost:3000/api/updateLikeSong/' + id) // eslint-disable-line
   .then(function (res) {
     return res.text();
   }).catch(function (err) {
@@ -18039,36 +18039,27 @@ var MenuBar = function MenuBar() {
                 { className: 'row' },
                 _react2.default.createElement(
                     'nav',
-                    { className: 'navbar navbar-default ct-navbar', role: 'navigation', style: { borderBottom: '1px solid #eee' } },
+                    { className: 'navbar navbar-fixed-top ct-navbar', role: 'navigation' },
                     _react2.default.createElement(
                         'div',
-                        { className: 'navbar-header col-sm-4 col-xs-3', style: styles.header },
+                        { className: 'navbar-header col-xs-8 col-xs-offset-2 text-center', style: styles.header },
                         _react2.default.createElement(
                             'a',
-                            { href: '/' },
+                            { href: '/', className: 'navbar-brand custom-title' },
                             _react2.default.createElement(
-                                'a',
-                                { className: 'navbar-brand', style: styles.titleWeb },
+                                'p',
+                                { style: styles.titleWeb },
                                 'iMusik'
                             )
                         )
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'form-group navbar-btn col-sm-4 col-xs-6' },
-                        _react2.default.createElement(
-                            'form',
-                            { action: '/go', method: 'post' },
-                            _react2.default.createElement('input', { type: 'text', className: 'form-control ct-search', placeholder: 'Type to Search...' })
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'navbar-header col-sm-4 col-xs-3 pull-right', style: styles.headerIconUser },
+                        { className: 'navbar-header col-xs-1 pull-right', style: styles.headerIconUser },
                         _react2.default.createElement(
                             'a',
                             { className: 'pull-right text-right' },
-                            _react2.default.createElement('img', { src: 'https://maxcdn.icons8.com/iOS7/PNG/50/User_Interface/user-50.png', alt: 'avatar', className: 'img img-resposive', style: styles.iconUser })
+                            _react2.default.createElement('img', { src: 'https://maxcdn.icons8.com/iOS7/PNG/32/Very_Basic/search-32.png', alt: 'avatar', className: 'img img-resposive', style: styles.iconUser })
                         )
                     )
                 )
@@ -18084,18 +18075,20 @@ var styles = {
     titleWeb: {
         fontStyle: 'bold',
         color: "#0366d6",
-        fontSize: 26
+        fontSize: 30,
+        textAlign: 'center'
     },
     inputSearch: {
         position: 'relative'
     },
     headerIconUser: {
-        paddingRight: 8,
-        paddingTop: 8
+        paddingRight: 20,
+        paddingTop: 20,
+        display: 'none'
     },
     iconUser: {
-        width: 40,
-        height: 40
+        width: 32,
+        height: 32
     }
 };
 exports.default = MenuBar;
@@ -21862,22 +21855,33 @@ var DefaultComponent = function DefaultComponent(_ref) {
     var location = _ref.location;
     return _react2.default.createElement(
         'div',
-        { className: 'container' },
+        { className: 'container', style: { marginTop: 140, marginBottom: 180 } },
         _react2.default.createElement(
             'div',
             { className: 'row' },
             _react2.default.createElement(
+                'div',
+                { className: 'col-sm-2 col-sm-offset-5 col-xs-6 col-xs-offset-3', style: { marginBottom: 50 } },
+                _react2.default.createElement('img', { src: 'images/Icon/fall.png', alt: '', width: '100%' })
+            ),
+            _react2.default.createElement(
                 'h1',
                 { className: 'col-xs-12 text-center' },
-                'KHONG TON TAI',
-                _react2.default.createElement('br', null),
-                'TRANG: "',
+                'Trang n\xE0y kh\xF4ng kh\u1EA3 d\u1EE5ng'
+            ),
+            _react2.default.createElement(
+                'h4',
+                { className: 'col-xs-12 text-center', style: { paddingTop: 10 } },
+                'Li\xEAn k\u1EBFt b\u1EA1n truy c\u1EADp c\xF3 th\u1EC3 b\u1ECB h\u1ECFng ho\u1EB7c trang c\xF3 th\u1EC3 \u0111\xE3 b\u1ECB x\xF3a.'
+            ),
+            _react2.default.createElement(
+                'h4',
+                { className: 'col-xs-12 text-center', style: { paddingTop: 50, color: '#08f' } },
                 _react2.default.createElement(
-                    'code',
-                    null,
-                    location.pathname
-                ),
-                '"'
+                    'a',
+                    { href: '/' },
+                    'Home page'
+                )
             )
         )
     );
@@ -22014,7 +22018,7 @@ Object.defineProperty(exports, "__esModule", {
 var $ = __webpack_require__(35);
 
 var CheckLogin = function CheckLogin(cb) {
-    $.get('https://imusik.herokuapp.com/login/check', function (text) {
+    $.get('http://localhost:3000/login/check', function (text) {
         // if (text.ROI === 'ROI') return cb(text);
         if (text === 'ROI') return cb(true);
         return cb(false);
@@ -22034,7 +22038,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var GetDiscover = function GetDiscover() {
-  return fetch('https://imusik.herokuapp.com/getDiscover') // eslint-disable-line
+  return fetch('http://localhost:3000/api') // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22055,7 +22059,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var GetDiscover = function GetDiscover(trang) {
-  return fetch('https://imusik.herokuapp.com/getDiscover/morediscover/' + trang) // eslint-disable-line
+  return fetch('http://localhost:3000/api/morediscover/' + trang) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22076,7 +22080,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var LayDiscoverOfSinger = function LayDiscoverOfSinger(id) {
-  return fetch('https://imusik.herokuapp.com/getDiscover/LayDiscoverOfSinger/' + id) // eslint-disable-line
+  return fetch('http://localhost:3000/api/LayDiscoverOfSinger/' + id) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22100,7 +22104,7 @@ var $ = __webpack_require__(35);
 
 var dangNhap = function dangNhap(username, password, cb) {
     var data = { username: username, password: password };
-    $.post('https://imusik.herokuapp.com/login', data, function (text) {
+    $.post('http://localhost:3000/login', data, function (text) {
         if (text == 'THANHCONG') return cb('THANHCONG');
         cb('THATBAI');
     });
@@ -22119,7 +22123,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var GetAllSongOfDiscover = function GetAllSongOfDiscover(id) {
-  return fetch('https://imusik.herokuapp.com/getDiscover/getSongFromDiscover/' + id) // eslint-disable-line
+  return fetch('http://localhost:3000/api/getSongFromDiscover/' + id) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22140,7 +22144,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getHotDiscover = function getHotDiscover() {
-  return fetch('https://imusik.herokuapp.com/getDiscover/getHotDiscover/') // eslint-disable-line
+  return fetch('http://localhost:3000/api/getHotDiscover/') // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22161,7 +22165,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getHotSinger = function getHotSinger() {
-  return fetch('https://imusik.herokuapp.com/getDiscover/getHotSinger/') // eslint-disable-line
+  return fetch('http://localhost:3000/api/getHotSinger/') // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22182,7 +22186,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getHotSong = function getHotSong() {
-  return fetch('https://imusik.herokuapp.com/getDiscover/getHotSong/') // eslint-disable-line
+  return fetch('http://localhost:3000/api/getHotSong/') // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22203,7 +22207,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getOneDiscover = function getOneDiscover(id) {
-  return fetch('https://imusik.herokuapp.com/getDiscover/getOneDiscover/' + id) // eslint-disable-line
+  return fetch('http://localhost:3000/api/getOneDiscover/' + id) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22224,7 +22228,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getOneSinger = function getOneSinger(id) {
-  return fetch('https://imusik.herokuapp.com/getDiscover/getOneSinger/' + id) // eslint-disable-line
+  return fetch('http://localhost:3000/api/getOneSinger/' + id) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22245,7 +22249,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var getSongOfSinger = function getSongOfSinger(id) {
-  return fetch('https://imusik.herokuapp.com/getDiscover/getSongOfSinger/' + id) // eslint-disable-line
+  return fetch('http://localhost:3000/api/getSongOfSinger/' + id) // eslint-disable-line
   .then(function (res) {
     return res.json();
   }).catch(function (err) {
@@ -22348,11 +22352,11 @@ var Discover = function (_Component) {
                         { className: "col-xs-12" },
                         _react2.default.createElement(
                             "div",
-                            { className: "title-popular-artists text-center" },
+                            { className: "title-popular-artists text-left" },
                             _react2.default.createElement(
                                 "h2",
                                 null,
-                                "Discovers"
+                                "Albums"
                             ),
                             _react2.default.createElement(
                                 "p",
@@ -22365,7 +22369,7 @@ var Discover = function (_Component) {
                     this.state.mang.map(function (e) {
                         return _react2.default.createElement(
                             "div",
-                            { className: "col-xs-6 col-sm-4 col-md-3 col-lg-2 video", style: styles.marinBottomOneDiscover, key: e.IdD },
+                            { className: "col-xs-6 col-sm-4 col-lg-2 video", style: styles.marinBottomOneDiscover, key: e.IdD },
                             _react2.default.createElement(_OneDiscover2.default, { NameDiscover: e.NameD,
                                 NameSinger: e.NameS,
                                 Image: e.ImageD,
@@ -22398,7 +22402,8 @@ exports.default = Discover;
 
 var styles = {
     paddingBottomDiscover: {
-        paddingBottom: 80
+        paddingBottom: 80,
+        paddingTop: 50
     },
     paddingTopBtn: {
         marginTop: 50
@@ -22523,9 +22528,9 @@ var DiscoverPage = function (_Component) {
     }, {
         key: "updateLikeSong",
         value: function updateLikeSong(id) {
-            $.get('/getDiscover/updateLikeSong/' + id, function (data) {
+            $.get('/api/updateLikeSong/' + id, function (data) {
                 var a = data - 1;
-                $('#like-song' + a).html(data);
+                $('#like-song' + id).html(data);
             });
         }
     }, {
@@ -22552,7 +22557,7 @@ var DiscoverPage = function (_Component) {
                         { className: "row" },
                         _react2.default.createElement(
                             "div",
-                            { className: "container" },
+                            { className: "container", style: { marginTop: 80 } },
                             _react2.default.createElement(
                                 "div",
                                 { className: "row" },
@@ -22586,15 +22591,15 @@ var DiscoverPage = function (_Component) {
                                                     e.NameD
                                                 ),
                                                 _react2.default.createElement(
-                                                    "h3",
+                                                    "h4",
                                                     null,
                                                     e.NameS
                                                 )
                                             ),
                                             _react2.default.createElement(
-                                                "h4",
+                                                "h5",
                                                 { className: "thong-tin" },
-                                                "The most Discover's songs in iMusik."
+                                                "The most Albums in iMusik."
                                             ),
                                             _react2.default.createElement(
                                                 "div",
@@ -22668,7 +22673,7 @@ var DiscoverPage = function (_Component) {
                                             { className: "luot-nghe" },
                                             _react2.default.createElement(
                                                 "h4",
-                                                { className: "fa fa-thumbs-up", id: 'like-song' + e.Like, "aria-hidden": "true", onClick: function onClick() {
+                                                { className: "fa fa-thumbs-up", id: 'like-song' + e.Id, "aria-hidden": "true", onClick: function onClick() {
                                                         return _this3.updateLikeSong(e.Id);
                                                     } },
                                                 " ",
@@ -22691,7 +22696,7 @@ var DiscoverPage = function (_Component) {
                                     _react2.default.createElement(
                                         "p",
                                         null,
-                                        "About Discover"
+                                        "About Album"
                                     )
                                 ),
                                 _react2.default.createElement(
@@ -22738,7 +22743,7 @@ var DiscoverPage = function (_Component) {
                                                         _react2.default.createElement(
                                                             "h4",
                                                             { style: styles.h4 },
-                                                            "Top 10 Songs"
+                                                            "Top 10 New Songs"
                                                         )
                                                     )
                                                 ),
@@ -22746,7 +22751,7 @@ var DiscoverPage = function (_Component) {
                                                 _react2.default.createElement(
                                                     "span",
                                                     { className: "new-song" },
-                                                    "Top 10 Songs"
+                                                    "Top 10 New Songs"
                                                 )
                                             )
                                         )
@@ -22770,7 +22775,7 @@ var DiscoverPage = function (_Component) {
                                                         _react2.default.createElement(
                                                             "h4",
                                                             { style: styles.h4 },
-                                                            "Top 10 Discovers"
+                                                            "Top 10 Albums"
                                                         )
                                                     )
                                                 ),
@@ -22778,7 +22783,7 @@ var DiscoverPage = function (_Component) {
                                                 _react2.default.createElement(
                                                     "span",
                                                     { className: "new-song" },
-                                                    "Top 10 Discovers"
+                                                    "Top 10 Albums"
                                                 )
                                             )
                                         )
@@ -22859,6 +22864,10 @@ var _updateLikeOfSong = __webpack_require__(43);
 
 var _updateLikeOfSong2 = _interopRequireDefault(_updateLikeOfSong);
 
+var _GetTopNewSong = __webpack_require__(255);
+
+var _GetTopNewSong2 = _interopRequireDefault(_GetTopNewSong);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22903,7 +22912,7 @@ var HotPage = function (_Component) {
                 });
                 console.log("2");
             } else {
-                (0, _getHotSong2.default)().then(function (arr) {
+                (0, _GetTopNewSong2.default)().then(function (arr) {
                     _this2.setState({
                         mang: arr
                     });
@@ -22930,9 +22939,9 @@ var HotPage = function (_Component) {
     }, {
         key: 'updateLikeSong',
         value: function updateLikeSong(id) {
-            $.get('/getDiscover/updateLikeSong/' + id, function (data) {
+            $.get('/api/updateLikeSong/' + id, function (data) {
                 var a = data - 1;
-                $('#like-song' + a).html(data);
+                $('#like-song' + id).html(data);
             });
         }
     }, {
@@ -22948,12 +22957,12 @@ var HotPage = function (_Component) {
                 ClickTrack: this.state.ClickTrack
 
             }) : "";
-            var showNameHotPage = this.props.idHotPage == 1 ? "Top 10 Songs" : "Top 10 Discovers";
+            var showNameHotPage = this.props.idHotPage == 1 ? "Top 10 New Songs" : "Top 10 Discovers";
             var showBanner = this.props.idHotPage == 1 ? _react2.default.createElement(_banner2.default, {
-                Name: 'Top 10 Songs',
+                Name: 'Top 10 New Songs',
                 ButtonEvent: 'Share'
             }) : _react2.default.createElement(_banner2.default, {
-                Name: 'Top 10 Discover',
+                Name: 'Top 10 Albums',
                 ButtonEvent: 'Share'
             });
 
@@ -22999,7 +23008,7 @@ var HotPage = function (_Component) {
                             { className: 'luot-nghe' },
                             _react2.default.createElement(
                                 'h4',
-                                { className: 'fa fa-thumbs-up', id: 'like-song' + e.Like, 'aria-hidden': 'true', onClick: function onClick() {
+                                { className: 'fa fa-thumbs-up', id: 'like-song' + e.Id, 'aria-hidden': 'true', onClick: function onClick() {
                                         return _this3.updateLikeSong(e.Id);
                                     } },
                                 ' ',
@@ -23041,7 +23050,7 @@ var HotPage = function (_Component) {
                             { className: 'col-sm-12' },
                             _react2.default.createElement(
                                 'div',
-                                { className: 'title-popular-artists text-center' },
+                                { className: 'title-popular-artists', style: { paddingTop: 20 } },
                                 _react2.default.createElement(
                                     'h2',
                                     null,
@@ -23077,7 +23086,7 @@ var HotPage = function (_Component) {
                                 ),
                                 _react2.default.createElement(
                                     'div',
-                                    { className: 'show-Charts col-xs-12', style: { marginTop: 20 } },
+                                    { className: 'show-Charts col-xs-12' },
                                     _react2.default.createElement(
                                         'div',
                                         { className: 'col-xs-12' },
@@ -23097,7 +23106,7 @@ var HotPage = function (_Component) {
                                                         _react2.default.createElement(
                                                             'h4',
                                                             { style: styles.h4 },
-                                                            'Top 10 Songs'
+                                                            'Top 10 New Songs'
                                                         )
                                                     )
                                                 ),
@@ -23105,14 +23114,14 @@ var HotPage = function (_Component) {
                                                 _react2.default.createElement(
                                                     'span',
                                                     { className: 'new-song' },
-                                                    'Top 10 Songs'
+                                                    'Top 10 New Songs'
                                                 )
                                             )
                                         )
                                     ),
                                     _react2.default.createElement(
                                         'div',
-                                        { className: 'col-xs-12', style: { marginTop: 20 } },
+                                        { className: 'col-xs-12', style: { marginTop: 20, marginBottom: 20 } },
                                         _react2.default.createElement(
                                             'div',
                                             { className: 'area' },
@@ -23129,7 +23138,7 @@ var HotPage = function (_Component) {
                                                         _react2.default.createElement(
                                                             'h4',
                                                             { style: styles.h4 },
-                                                            'Top 10 Discovers'
+                                                            'Top 10 Albums'
                                                         )
                                                     )
                                                 ),
@@ -23137,7 +23146,7 @@ var HotPage = function (_Component) {
                                                 _react2.default.createElement(
                                                     'span',
                                                     { className: 'new-song' },
-                                                    'Top 10 Discovers'
+                                                    'Top 10 Albums'
                                                 )
                                             )
                                         )
@@ -23205,10 +23214,10 @@ var Hot = function Hot() {
                 { className: 'row' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'col-xs-12' },
+                    { className: 'col-xs-12', style: { paddingTop: 50 } },
                     _react2.default.createElement(
                         'div',
-                        { className: 'title-hot-trending text-center' },
+                        { className: 'title-hot-trending' },
                         _react2.default.createElement(
                             'h2',
                             null,
@@ -23228,13 +23237,13 @@ var Hot = function Hot() {
                 { className: 'row' },
                 _react2.default.createElement(
                     'div',
-                    { className: 'col-sm-6' },
+                    { className: 'col-sm-6', style: { marginTop: 20 } },
                     _react2.default.createElement(
                         'div',
                         { className: 'area' },
                         _react2.default.createElement(
                             'a',
-                            { href: true, to: '/hot/1' },
+                            { href: '/hot/1' },
                             _react2.default.createElement(
                                 'div',
                                 { className: 'mask' },
@@ -23250,7 +23259,7 @@ var Hot = function Hot() {
                                     _react2.default.createElement(
                                         'h4',
                                         { style: styles.h4 },
-                                        'Top 10 Songs'
+                                        'Top 10 New Songs'
                                     )
                                 )
                             ),
@@ -23258,7 +23267,7 @@ var Hot = function Hot() {
                             _react2.default.createElement(
                                 'span',
                                 { className: 'new-song' },
-                                'Top 10 Songs'
+                                'Top 10 New Songs'
                             )
                         )
                     )
@@ -23287,7 +23296,7 @@ var Hot = function Hot() {
                                     _react2.default.createElement(
                                         'h4',
                                         { style: styles.h4 },
-                                        'Top 10 Discovers'
+                                        'Top 10 Albums'
                                     )
                                 )
                             ),
@@ -23295,7 +23304,7 @@ var Hot = function Hot() {
                             _react2.default.createElement(
                                 'span',
                                 { className: 'new-song' },
-                                'Top 10 Discovers'
+                                'Top 10 Albums'
                             )
                         )
                     )
@@ -23358,10 +23367,10 @@ var Intro = function (_Component) {
                     { className: "row" },
                     _react2.default.createElement(
                         "div",
-                        { className: "col-xs-12 content-post text-center" },
+                        { className: "content-post" },
                         _react2.default.createElement(
                             "div",
-                            { className: "content-title" },
+                            { className: "col-xs-12 content-title text-center" },
                             _react2.default.createElement(
                                 "h1",
                                 null,
@@ -23373,7 +23382,7 @@ var Intro = function (_Component) {
                             { href: "/hot/1" },
                             _react2.default.createElement(
                                 "div",
-                                { className: "content-poster" },
+                                { className: "col-xs-12 col-sm-10 col-sm-offset-1 content-poster" },
                                 _react2.default.createElement("img", { src: "images/banner/best song 2016.jpg", className: "img img-responsive", width: "100%" })
                             )
                         )
@@ -23458,11 +23467,17 @@ var Login = function (_Component) {
             });
         }
     }, {
+        key: 'signup',
+        value: function signup(e) {
+            e.preventDefault();
+            alert('Error: E10');
+        }
+    }, {
         key: 'render',
         value: function render() {
             var showHelloUser = !this.state.daDB ? _react2.default.createElement(
                 'div',
-                { className: 'container' },
+                { className: 'container  ct-login', style: { marginTop: 50 } },
                 _react2.default.createElement(
                     'div',
                     { className: 'row' },
@@ -23481,10 +23496,10 @@ var Login = function (_Component) {
                         _react2.default.createElement(
                             'form',
                             { method: 'post', onSubmit: this.onsubmit.bind(this) },
-                            _react2.default.createElement('input', { type: 'email', ref: 'txtEmail', placeholder: 'type your email', style: styles.input }),
+                            _react2.default.createElement('input', { type: 'email', ref: 'txtEmail', placeholder: 'email: sonhoai272@gmail.com', style: styles.input }),
                             _react2.default.createElement('br', null),
                             _react2.default.createElement('br', null),
-                            _react2.default.createElement('input', { type: 'text', ref: 'txtPass', placeholder: 'type your password', style: styles.input }),
+                            _react2.default.createElement('input', { type: 'text', ref: 'txtPass', placeholder: 'pass: 123', style: styles.input }),
                             _react2.default.createElement('br', null),
                             _react2.default.createElement('br', null),
                             _react2.default.createElement(
@@ -23503,7 +23518,7 @@ var Login = function (_Component) {
                             'No account? ',
                             _react2.default.createElement(
                                 'a',
-                                { href: '' },
+                                { href: '', onClick: this.signup.bind(this) },
                                 'Create Account!'
                             )
                         )
@@ -23542,7 +23557,7 @@ var Login = function (_Component) {
                 )
             ) : _react2.default.createElement(
                 'div',
-                { className: 'container-fluid say-hello' },
+                { className: 'container-fluid say-hello', style: { marginTop: 100 } },
                 _react2.default.createElement(
                     'div',
                     { className: 'row' },
@@ -23694,10 +23709,10 @@ var SingerRandom = function (_Component) {
                     { className: "row" },
                     _react2.default.createElement(
                         "div",
-                        { className: "col-xs-12" },
+                        { className: "col-xs-12", style: { paddingTop: 50 } },
                         _react2.default.createElement(
                             "div",
-                            { className: "title-popular-artists text-center" },
+                            { className: "title-popular-artists" },
                             _react2.default.createElement(
                                 "h2",
                                 null,
@@ -23711,16 +23726,33 @@ var SingerRandom = function (_Component) {
                         ),
                         _react2.default.createElement("hr", null)
                     ),
-                    this.state.mang.map(function (e) {
-                        return _react2.default.createElement(
-                            "div",
-                            { className: "col-sm-4 col-md-3 col-xs-6", key: e.IdS },
-                            _react2.default.createElement(_oneSinger2.default, {
-                                NameS: e.NameS,
-                                ImageS: e.ImageS,
-                                IdS: e.IdS
-                            })
-                        );
+                    this.state.mang.map(function (e, i) {
+                        if (i < 2) {
+                            return _react2.default.createElement(
+                                "div",
+                                { className: "col-sm-4 col-xs-6", key: e.IdS },
+                                _react2.default.createElement(_oneSinger2.default, {
+                                    NameS: e.NameS,
+                                    ImageS: e.ImageS,
+                                    IdS: e.IdS,
+                                    FontSizeTitle: "16",
+                                    paddingTopTitle: "22",
+                                    LikeS: e.LikeS,
+                                    ShowLike: "inline"
+                                })
+                            );
+                        } else {
+                            return _react2.default.createElement(
+                                "div",
+                                { className: "col-sm-2 col-xs-6", key: e.IdS },
+                                _react2.default.createElement(_oneSinger2.default, {
+                                    NameS: e.NameS,
+                                    ImageS: e.ImageS,
+                                    IdS: e.IdS,
+                                    ShowLike: "none"
+                                })
+                            );
+                        }
                     })
                 )
             );
@@ -23794,9 +23826,17 @@ var OneSinger = function (_Component) {
                     ),
                     _react2.default.createElement('img', { src: this.props.ImageS, alt: '', className: 'img-responsive' }),
                     _react2.default.createElement(
-                        'h4',
-                        null,
-                        this.props.NameS
+                        'h5',
+                        {
+                            style: { fontSize: this.props.FontSizeTitle, paddingTop: this.props.paddingTopTitle } },
+                        this.props.NameS,
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(
+                            'p',
+                            { className: 'fa fa-thumbs-up', style: { display: this.props.ShowLike } },
+                            ' '
+                        ),
+                        this.props.LikeS
                     )
                 )
             );
@@ -23928,8 +23968,8 @@ var SingerPage = function (_Component) {
     }, {
         key: "updateLikeSong",
         value: function updateLikeSong(id) {
-            $.get('/getDiscover/updateLikeSong/' + id, function (data) {
-                $('#like-song' + data - 1).html(data);
+            $.get('/api/updateLikeSong/' + id, function (data) {
+                $('#like-song' + id).html(data);
             });
         }
     }, {
@@ -23979,7 +24019,7 @@ var SingerPage = function (_Component) {
                             { className: "luot-nghe" },
                             _react2.default.createElement(
                                 "h4",
-                                { className: "fa fa-thumbs-up", id: 'like-song' + e.Like, "aria-hidden": "true", onClick: function onClick() {
+                                { className: "fa fa-thumbs-up", id: 'like-song' + e.Id, "aria-hidden": "true", onClick: function onClick() {
                                         return _this3.updateLikeSong(e.Id);
                                     } },
                                 " ",
@@ -24072,22 +24112,22 @@ var SingerPage = function (_Component) {
                 ),
                 _react2.default.createElement(
                     "div",
-                    { className: "container" },
+                    { className: "container", style: { backgroundColor: '#f9f9f9' } },
                     _react2.default.createElement(
                         "div",
                         { className: "row" },
                         _react2.default.createElement(
                             "div",
-                            { className: "col-sm-8 ccol-xs-12" },
+                            { className: "col-sm-8 col-xs-12", style: { backgroundColor: '#fff', paddingTop: 20 } },
                             _react2.default.createElement(
                                 "div",
                                 null,
                                 _react2.default.createElement(
                                     "div",
-                                    { className: "title-song-singer text-center" },
+                                    { className: "title-song-singer" },
                                     _react2.default.createElement(
                                         "h2",
-                                        null,
+                                        { style: { color: '#08f' } },
                                         "Top Songs By ",
                                         this.state.TenCaSi
                                     ),
@@ -24101,10 +24141,10 @@ var SingerPage = function (_Component) {
                             ),
                             _react2.default.createElement(
                                 "div",
-                                { className: "Discover" },
+                                { className: "Discover", style: { paddingTop: 30 } },
                                 _react2.default.createElement(
                                     "h2",
-                                    { className: " text-center" },
+                                    { className: "top-discover-by", style: { color: '#08f' } },
                                     "Top Discovers By ",
                                     this.state.TenCaSi
                                 ),
@@ -24127,10 +24167,10 @@ var SingerPage = function (_Component) {
                         ),
                         _react2.default.createElement(
                             "div",
-                            { className: "col-sm-4 col-xs-12" },
+                            { className: "col-sm-4 col-xs-12", style: { paddingTop: 20 } },
                             _react2.default.createElement(
                                 "h2",
-                                { className: "text-center" },
+                                { className: "recent-posts", style: { color: '#08f', paddingLeft: 15 } },
                                 "Recent Posts"
                             ),
                             _react2.default.createElement(
@@ -24195,7 +24235,8 @@ var styles = {
         paddingTop: 50,
         marginBottom: 20,
         paddingBottom: 30,
-        backgroundImage: 'url(https://goo.gl/xbvqOA)'
+        backgroundImage: 'url(https://goo.gl/xbvqOA)',
+        marginTop: 95
     }
 };
 
@@ -24241,90 +24282,112 @@ var Footer = function (_Component) {
                 null,
                 _react2.default.createElement(
                     "div",
-                    { className: "container  text-center", style: { marginBottom: 0 } },
+                    { className: "container", style: { marginBottom: 0 } },
                     _react2.default.createElement(
                         "div",
                         { className: "row", style: { paddingTop: 100 } },
                         _react2.default.createElement(
                             "div",
-                            { className: "col-sm-4 col-xs-12" },
+                            { className: "col-sm-8 col-sm-offset-2" },
                             _react2.default.createElement(
-                                "h1",
-                                null,
-                                "iMusik"
-                            ),
-                            _react2.default.createElement(
-                                "p",
-                                null,
-                                "Music's everywhere."
-                            ),
-                            _react2.default.createElement(
-                                "p",
-                                null,
-                                "Version: 2.5"
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-sm-4 col-xs-6" },
-                            _react2.default.createElement(
-                                "h3",
-                                null,
-                                "About"
-                            ),
-                            _react2.default.createElement(
-                                "a",
-                                { href: "/Dashboard" },
+                                "div",
+                                { className: "col-sm-6 col-xs-6" },
+                                _react2.default.createElement(
+                                    "h1",
+                                    { style: { paddingBottom: 25 } },
+                                    _react2.default.createElement("img", { src: "images/Icon/iMusik.ico", alt: "", width: "10%" }),
+                                    "iMusik"
+                                ),
                                 _react2.default.createElement(
                                     "p",
                                     null,
-                                    "Admin Page"
+                                    "Music's everywhere."
+                                ),
+                                _react2.default.createElement(
+                                    "p",
+                                    null,
+                                    _react2.default.createElement(
+                                        "a",
+                                        { href: "/help/future" },
+                                        "Version: 2.8"
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    "p",
+                                    null,
+                                    _react2.default.createElement(
+                                        "a",
+                                        { href: "/help/future" },
+                                        "App For Android - iOS - Windows 10."
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    "p",
+                                    null,
+                                    _react2.default.createElement(
+                                        "a",
+                                        { href: "/help/future" },
+                                        "Terms"
+                                    )
                                 )
                             ),
                             _react2.default.createElement(
-                                "p",
-                                null,
-                                "API"
-                            ),
-                            _react2.default.createElement(
-                                "p",
-                                null,
-                                "Help"
+                                "div",
+                                { className: "col-xs-6 col-sm-6" },
+                                _react2.default.createElement(
+                                    "h3",
+                                    { style: { paddingBottom: 25 } },
+                                    "iMusik for developers"
+                                ),
+                                _react2.default.createElement(
+                                    "p",
+                                    null,
+                                    _react2.default.createElement(
+                                        "a",
+                                        { href: "/help/future" },
+                                        "Blog"
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    "a",
+                                    { href: "/Dashboard" },
+                                    _react2.default.createElement(
+                                        "p",
+                                        null,
+                                        "Admin Page"
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    "p",
+                                    null,
+                                    _react2.default.createElement(
+                                        "a",
+                                        { href: "/help/future" },
+                                        "API"
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    "p",
+                                    null,
+                                    _react2.default.createElement(
+                                        "a",
+                                        { href: "/help/future" },
+                                        "Get link mp3"
+                                    )
+                                )
                             )
                         ),
                         _react2.default.createElement(
                             "div",
-                            { className: "col-sm-4 col-xs-6" },
-                            _react2.default.createElement(
-                                "h3",
-                                null,
-                                "Contact"
-                            ),
+                            { className: "col-sm-8 col-sm-offset-2", style: { marginTop: 100 } },
                             _react2.default.createElement(
                                 "p",
                                 null,
-                                "Website: sonhteam.com"
-                            ),
-                            _react2.default.createElement(
-                                "p",
-                                null,
-                                "Email: info@sonhteam.com"
-                            ),
-                            _react2.default.createElement(
-                                "p",
-                                null,
-                                "Number: +84985806646"
-                            )
-                        ),
-                        _react2.default.createElement(
-                            "div",
-                            { className: "col-xs-12 text-center", style: { marginTop: 100 } },
-                            _react2.default.createElement(
-                                "p",
-                                null,
-                                "Mpi Store is the precursor of iMusik 2012-2017.",
+                                "Mpi Store is the precursor of iMusik 2012 - 2017.",
                                 _react2.default.createElement("br", null),
-                                "\xA9 Copyright sonH Team Limited 2011-2017. All rights reserved.",
+                                "\xA9 Copyright sonH Team Limited 2011-2017.",
+                                _react2.default.createElement("br", null),
+                                "All rights reserved.",
                                 _react2.default.createElement("br", null),
                                 "Design by sonH."
                             )
@@ -38672,6 +38735,27 @@ exports.default = valueEqual;
 __webpack_require__(102);
 module.exports = __webpack_require__(101);
 
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var GetTopNewSong = function GetTopNewSong() {
+  return fetch('http://localhost:3000/api/topnewsong/') // eslint-disable-line
+  .then(function (res) {
+    return res.json();
+  }).catch(function (err) {
+    return console.log(err + "");
+  });
+};
+
+exports.default = GetTopNewSong;
 
 /***/ })
 /******/ ]);

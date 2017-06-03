@@ -1,270 +1,271 @@
 <html lang="vi">
 
 <head>
-  <base href="../">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>iMusik Dashboard</title>
-  <link href="style/main.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/custom.js"></script>
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <script>
-    var trang = 1
-    const IDS = "<%=info.Id %>";
-    $(document).ready(() => {
+    <base href="https://imusik.herokuapp.com">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>iMusik Dashboard</title>
+    <link href="style/main.css" rel="stylesheet">
+    <link rel="shortcut icon" href="images/Icon/iMusik.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script>
+        var trang = 1
+        const IDS = "<%=info.Id %>";
+        $(document).ready(() => {
 
-      $('#btnLoad').click((e) => {
-        e.preventDefault();
-        trang = trang + 1;
-        $.get(`/Dashboard/morediscover/${trang}`, data => {
-          console.log("trang: ", trang)
-          console.log(data);
-          $('#table-discover').append(data);
+            $('#btnLoad').click((e) => {
+                e.preventDefault();
+                trang = trang + 1;
+                $.get(`/Dashboard/morediscover/${trang}`, data => {
+                    console.log("trang: ", trang)
+                    console.log(data);
+                    $('#table-discover').append(data);
+                });
+            });
+
+            $('.timkiem').keyup((e) => {
+                e.preventDefault();
+                $('#ul-song').html(`Loading...`);
+                const val = $('#timnhac').val()
+                var txt = '';
+                for (var c = 0; c < val.length; c++) {
+                    if (c == 0 && val[c] != '') {
+                        txt += val[c].toUpperCase()
+                    } else {
+                        if (val[c - 1] == ' ') {
+                            txt += val[c].toUpperCase()
+                        } else {
+                            txt += val[c]
+                        }
+                    }
+                }
+                $('#timnhac').val(txt)
+                $.post(`/Dashboard/TimBaiHat/`, $('#timnhac'), data => {
+                    if (data == []) {
+                        $('#ul-song').html(`Không có`);
+                    } else {
+                        console.log(data);
+                        $('#ul-song').html(data);
+                    }
+                });
+            })
+
+            $('#Song-Tab').click((e) => {
+                e.preventDefault();
+                $.get(`/Dashboard/song/`, data => {
+                    console.log(data);
+                    $('#content-layout').html(data);
+                    $('#Song-Tab').addClass('active');
+                    $('#Discover-tab').removeClass('active');
+                });
+            })
+
         });
-      });
-
-      $('.timkiem').keyup((e) => {
-        e.preventDefault();
-        $('#ul-song').html(`Loading...`);
-        const val = $('#timnhac').val()
-        var txt = '';
-        for (var c = 0; c < val.length; c++) {
-          if (c == 0 && val[c] != '') {
-            txt += val[c].toUpperCase()
-          } else {
-            if (val[c - 1] == ' ') {
-              txt += val[c].toUpperCase()
-            } else {
-              txt += val[c]
-            }
-          }
-        }
-        $('#timnhac').val(txt)
-        $.post(`/Dashboard/TimBaiHat/`, $('#timnhac'), data => {
-          if (data == []) {
-            $('#ul-song').html(`Không có`);
-          } else {
-            console.log(data);
-            $('#ul-song').html(data);
-          }
-        });
-      })
-
-      $('#Song-Tab').click((e) => {
-        e.preventDefault();
-        $.get(`/Dashboard/song/`, data => {
-          console.log(data);
-          $('#content-layout').html(data);
-          $('#Song-Tab').addClass('active');
-          $('#Discover-tab').removeClass('active');
-        });
-      })
-
-    });
-  </script>
+    </script>
 </head>
 
 <body>
-  <header>
-    <div class="container">
-      <div class="row">
-        <nav class="navbar navbar-default ct-navbar menu-icon" role="navigation" style="border-color:#ddd">
-          <div class="navbar-header col-xs-12" style="padding-left: 0px">
-            <a class="navbar-brand" href="#" style="font-size: 28px; color: #08f">Dashboard</a>
-          </div>
-        </nav>
-      </div>
-    </div>
-  </header>
+    <header>
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-default ct-navbar menu-icon" role="navigation" style="border-color:#ddd">
+                    <div class="navbar-header col-xs-12" style="padding-left: 0px">
+                        <a class="navbar-brand" href="#" style="font-size: 28px; color: #08f">Dashboard</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
 
-  <div class="container">
-    <div class="row">
-      <ul class="tab">
-        <a href="/Dashboard">
-          <li class="active" id="Discover-tab">Discover</li>
-        </a>
-        <li id="Song-Tab">Song</li>
-        <!--<li  onCLick="alert('Coming Soon');">Singer</li>
+    <div class="container">
+        <div class="row">
+            <ul class="tab">
+                <a href="/Dashboard">
+                    <li class="active" id="Discover-tab">Albums</li>
+                </a>
+                <li id="Song-Tab">Songs</li>
+                <!--<li  onCLick="alert('Coming Soon');">Singer</li>
         <li  onCLick="alert('Coming Soon');">user</li>-->
-      </ul>
-      <hr>
-    </div>
-    <div class="row" id="content-layout">
-      <div class="col-sm-12" style=" box-shadow: 1px 1px 10px #eee;">
-        <div class="header-discover">
-          <span class="pull-left title-all-discover">Tất cả discover</span>
-          <button class="btn btn-default pull-right btn-add-discover" data-toggle="modal" data-target="#addDiscover" data-backdrop="static">
+            </ul>
+            <hr>
+        </div>
+        <div class="row" id="content-layout">
+            <div class="col-sm-12" style=" box-shadow: 1px 1px 10px #eee;">
+                <div class="header-discover">
+                    <span class="pull-left title-all-discover">Tất cả album</span>
+                    <button class="btn btn-default pull-right btn-add-discover" data-toggle="modal" data-target="#addDiscover" data-backdrop="static">
             <i class="glyphicon glyphicon-plus-sign"></i>
           </button>
-        </div>
-        <div class="col-xs-12">
-          <form action="/go" method="post" class="col-xs-6 col-xs-offset-3 styles-search">
-            <input type="text" class="form-control search-discover" placeholder="Type to Search..." style="position: relative;">
-          </form>
-        </div>
-        <div class="content-list-discover">
-          <div id="table-discover">
-            <% info.forEach((e)=>{%>
-              <div class="col-xs-12 col-sm-3" style="padding-top: 10px; border-bottom: 1px solid #ddd">
-                <div class="col-sm-6 col-xs-4">
-                  <img src="<%=e.ImageD%>" alt="" class="imgimg-responsive " width="100%">
                 </div>
-                <div class="col-sm-6 col-xs-8">
-                  <h4>
-                    <%=e.NameD%>
-                  </h4>
+                <div class="col-xs-12">
+                    <form action="/go" method="post" class="col-xs-6 col-xs-offset-3 styles-search">
+                        <input type="text" class="form-control search-discover" placeholder="Type to Search..." style="position: relative;">
+                    </form>
                 </div>
-                <div class="col-xs-12" style="padding: 10px;">
-                  <div class="btn btn-default btn-update-dis"><a href="/dashboard/updatediscover/<%=e.IdD%>">Sửa</a></div>
-                  <div class="btn btn-default"><a href="/dashboard/deletediscover/<%=e.IdD%>">Xóa</a></div>
+                <div class="content-list-discover">
+                    <div id="table-discover">
+                        <% info.forEach((e)=>{%>
+                            <div class="col-xs-12 col-sm-3" style="padding-top: 10px; border-bottom: 1px solid #ddd">
+                                <div class="col-sm-6 col-xs-4">
+                                    <img src="<%=e.ImageD%>" alt="" class="imgimg-responsive " width="100%">
+                                </div>
+                                <div class="col-sm-6 col-xs-8">
+                                    <h4>
+                                        <%=e.NameD%>
+                                    </h4>
+                                </div>
+                                <div class="col-xs-12" style="padding: 10px;">
+                                    <div class="btn btn-default btn-update-dis"><a href="/dashboard/updatediscover/<%=e.IdD%>">Sửa</a></div>
+                                    <div class="btn btn-default"><a href="/dashboard/deletediscover/<%=e.IdD%>">Xóa</a></div>
+                                </div>
+                            </div>
+                            <%} )%>
+                    </div>
+                    <div>
+                        <div class="col-xs-6 col-xs-offset-5" style="margin-top: 26px; padding-bottom: 26px;">
+                            <span class="button" id="btnLoad">More</span>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <%} )%>
-          </div>
-          <div>
-            <div class="col-xs-6 col-xs-offset-5" style="margin-top: 26px; padding-bottom: 26px;">
-              <span class="button" id="btnLoad">More</span>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- Them Model -->
-  <div id="addDiscover" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-md">
+    <!-- Them Model -->
+    <div id="addDiscover" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Thêm Discover Mới</h4>
-        </div>
-        <div class="modal-body col-xs-12">
-          <div class="col-xs-12">
-            <form action="/dashboard/addNewDiscover" method="POST" enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="name">Tên Discover:</label>
-                <input type="text" class="form-control" id="name" placeholder="Tên" name="Title">
-              </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="mota">Mô Tả:</label>
-              <input type="text" class="form-control" id="mota" placeholder="Mô tả" name="Desc">
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="thich">Lượt Thích:</label>
-              <input type="text" class="form-control" id="thich" placeholder="Thích" name="Like">
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="casi">Ca Sĩ:</label>
-              <select name="Singer">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm Album Mới</h4>
+                </div>
+                <div class="modal-body col-xs-12">
+                    <div class="col-xs-12">
+                        <form action="/dashboard/addNewDiscover" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="name">Tên Discover:</label>
+                                <input type="text" class="form-control" id="name" placeholder="Tên" name="Title">
+                            </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="mota">Mô Tả:</label>
+                            <input type="text" class="form-control" id="mota" placeholder="Mô tả" name="Desc">
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="thich">Lượt Thích:</label>
+                            <input type="text" class="form-control" id="thich" placeholder="Thích" name="Like">
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="casi">Ca Sĩ:</label>
+                            <select name="Singer">
                   <%allSinger.forEach((e) => {%>
                     <option value="<%=e.IdS%>"><%=e.NameS%></option>
                   <%})%>
                 </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="anh">Ảnh bìa:</label>
+                            <input type="file" class="form-control" name="avatarDiscover" id="avatar">
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <label>Thêm Bài Hát: </label>
+                        <div class="timkiem">
+                            <input type="text" class="form-control input-tim" placeholder="Mô tả" name="ten" id="timnhac" value="">
+                        </div>
+                        <ul id="ul-song" class="col-xs-12">
+                            <div class="list-song">
+                                <li>Kết quả tìm kiếm:</li>
+                            </div>
+                        </ul>
+                    </div>
+                    <div class="col-xs-12">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-xs-12">
+                        <input type="submit" value="Thêm Discover" class="btn btn-primary pull-left" />
+                    </div>
+                </div>
+                </form>
             </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="anh">Ảnh bìa:</label>
-              <input type="file" class="form-control" name="avatarDiscover" id="avatar">
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <label>Thêm Bài Hát: </label>
-            <div class="timkiem">
-              <input type="text" class="form-control input-tim" placeholder="Mô tả" name="ten" id="timnhac" value="">
-            </div>
-            <ul id="ul-song" class="col-xs-12">
-              <div class="list-song">
-                <li>Kết quả tìm kiếm:</li>
-              </div>
-            </ul>
-          </div>
-          <div class="col-xs-12">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="col-xs-12">
-            <input type="submit" value="Thêm Discover" class="btn btn-primary pull-left" />
-          </div>
-        </div>
-        </form>
-      </div>
 
+        </div>
     </div>
-  </div>
 
-  <!-- Them bai hat-->
-  <div id="addSong" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-md">
+    <!-- Them bai hat-->
+    <div id="addSong" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Thêm Bài Hát Mới</h4>
-        </div>
-        <form action="/dashboard/addnewsong" method="POST">
-        <div class="modal-body col-xs-12">
-          <div class="col-xs-12">
-              <div class="form-group">
-                <label for="name">Tên Bài Hát:</label>
-                <input type="text" class="form-control" id="name" placeholder="Tên" name="Title">
-              </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="mota">Lời Bài Hát:</label>
-              <textarea type="text" class="form-control" id="mota" placeholder="Lời bài hát" name="Desc"></textarea>
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="thich">Đường dẫn hình:</label>
-              <input type="text" class="form-control" id="LinkImage" placeholder="Đường dẫn hình" name="LinkImage">
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="thich">Đường dẫn file mp3:</label>
-              <input type="text" class="form-control" id="LinkMp3" placeholder="Đường dẫn file mp3" name="LinkMp3">
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <div class="form-group">
-              <label for="casi">Ca Sĩ:</label>
-              <select name="Singer">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thêm Bài Hát Mới</h4>
+                </div>
+                <form action="/dashboard/addnewsong" method="POST">
+                    <div class="modal-body col-xs-12">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="name">Tên Bài Hát:</label>
+                                <input type="text" class="form-control" id="name" placeholder="Tên" name="Title">
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="mota">Lời Bài Hát:</label>
+                                <textarea type="text" class="form-control" id="mota" placeholder="Lời bài hát" name="Desc"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="thich">Đường dẫn hình:</label>
+                                <input type="text" class="form-control" id="LinkImage" placeholder="Đường dẫn hình" name="LinkImage">
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="thich">Đường dẫn file mp3:</label>
+                                <input type="text" class="form-control" id="LinkMp3" placeholder="Đường dẫn file mp3" name="LinkMp3">
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="casi">Ca Sĩ:</label>
+                                <select name="Singer">
                   <%allSinger.forEach((e) => {%>
                     <option value="<%=e.IdS%>"><%=e.NameS%></option>
                   <%})%>
                 </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-xs-12">
+                            <input type="submit" value="Thêm Bài Hát" class="btn btn-primary pull-left" />
+                        </div>
+                    </div>
+                </form>
             </div>
-          </div>
-          <div class="col-xs-12">
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="col-xs-12">
-            <input type="submit" value="Thêm Bài Hát" class="btn btn-primary pull-left" />
-          </div>
-        </div>
-        </form>
-      </div>
 
+        </div>
     </div>
-  </div>
 </body>
 
 </html>

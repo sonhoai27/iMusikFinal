@@ -19,7 +19,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use('/getDiscover', require('./router/Discover.js'))
+app.use('/api', require('./router/api.js'))
 app.use('/Dashboard', require('./router/Dashboard.js'))
 app.use('/login', require('./controllers/signup'))
 app.get('/checkadmin', (req, res) => {

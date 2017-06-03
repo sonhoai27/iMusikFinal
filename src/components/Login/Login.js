@@ -26,26 +26,30 @@ export default class Login extends Component {
             }
         })
     }
+    signup(e){
+        e.preventDefault()
+        alert('Error: E10')
+    }
     render() {
         const showHelloUser = !this.state.daDB ?
-            <div className="container">
+            <div className="container  ct-login" style={{ marginTop: 50 }}>
                 <div className="row">
                     <div className="col-sm-12">
                         <h1 className="text-center" style={styles.login}>Login</h1>
                     </div>
                     <div className="col-sm-4 col-sm-offset-4">
                         <form method="post" onSubmit={this.onsubmit.bind(this)}>
-                            <input type="email" ref="txtEmail" placeholder="type your email" style={styles.input} />
+                            <input type="email" ref="txtEmail" placeholder="email: sonhoai272@gmail.com" style={styles.input} />
                             <br />
                             <br />
-                            <input type="text" ref="txtPass" placeholder="type your password" style={styles.input} />
+                            <input type="text" ref="txtPass" placeholder="pass: 123" style={styles.input} />
                             <br />
                             <br />
                             <button type="submit" style={styles.button}>Login</button>
                         </form >
                     </div>
                     <div className="col-sm-12 text-center" style={styles.account}>
-                        <p>No account? <a href="">Create Account!</a></p>
+                        <p>No account? <a href ="" onClick={this.signup.bind(this)}>Create Account!</a></p>
                     </div>
                     <div className="col-sm-2 col-sm-offset-5 col-xs-6 col-xs-offset-3">
                         <span className="pull-left"><a href="">Terms of Use</a></span>
@@ -57,14 +61,14 @@ export default class Login extends Component {
                 </div>
             </div>
             :
-            <div className="container-fluid say-hello">
+            <div className="container-fluid say-hello" style={{marginTop: 100}}>
                 <div className="row">
                     <div className="col-sm-12 text-center" style={styles.welcome}>
-                        <h1 style={{fontSize: 100, paddingTop: 100 }}>Hello!</h1>
+                        <h1 style={{ fontSize: 100, paddingTop: 100 }}>Hello!</h1>
                         <h3 style={{ paddingTop: 20 }}>Welcome to <b>iMusik</b></h3>
                     </div>
-                    <div className="col-sm-12 text-center" style={{paddingTop: 50}}>
-                        <h5>Goto <a href="/" style={{color: '#FFDB4C'}}>iMusik's Home Page</a></h5>
+                    <div className="col-sm-12 text-center" style={{ paddingTop: 50 }}>
+                        <h5>Goto <a href="/" style={{ color: '#FFDB4C' }}>iMusik's Home Page</a></h5>
                     </div>
                 </div>
             </div>
@@ -72,7 +76,7 @@ export default class Login extends Component {
         return (
 
             <div>
-                { showHelloUser }
+                {showHelloUser}
             </div>
 
         )

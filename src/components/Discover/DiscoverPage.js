@@ -58,9 +58,9 @@ export default class DiscoverPage extends Component {
         })
     }
     updateLikeSong(id) {
-        $.get('/getDiscover/updateLikeSong/' + id, data => {
+        $.get('/api/updateLikeSong/' + id, data => {
             var a = data - 1
-            $('#like-song' + a ).html(data)
+            $('#like-song' + id).html(data)
         })
 
     }
@@ -77,7 +77,7 @@ export default class DiscoverPage extends Component {
             <div>
                 <div className="container-fluid" style={styles.colorBg}>
                     <div className="row">
-                        <div className="container">
+                        <div className="container" style={{marginTop: 80}}>
                             <div className="row">
                                 <div className="col-sm-3 col-sm-offset-0 col-xs-6 col-xs-offset-3" style={styles.shadow}>
                                     {this.state.mang.map(e =>
@@ -98,11 +98,11 @@ export default class DiscoverPage extends Component {
                                         <div key={e.IdD} style={styles.infoDiscover}>
                                             <div className="InfoDiscover">
                                                 <h1 style={styles.h2}>{e.NameD}</h1>
-                                                <h3>{e.NameS}</h3>
+                                                <h4>{e.NameS}</h4>
                                             </div>
-                                            <h4 className="thong-tin">
-                                                The most Discover's songs in iMusik.
-                                        </h4>
+                                            <h5 className="thong-tin">
+                                                The most Albums in iMusik.
+                                        </h5>
                                             <div className="buttonPlay">
                                                 <i className="fa fa-thumbs-up" aria-hidden="true">{this.state.Like}</i>
                                             </div>
@@ -134,7 +134,7 @@ export default class DiscoverPage extends Component {
                                             <p>{e.NameS}</p>
                                         </div>
                                         <div className="luot-nghe">
-                                            <h4 className="fa fa-thumbs-up" id={'like-song' + e.Like} aria-hidden="true" onClick={() => this.updateLikeSong(e.Id)}> {e.Like}</h4>
+                                            <h4 className="fa fa-thumbs-up" id={'like-song' + e.Id} aria-hidden="true" onClick={() =>( this.updateLikeSong(e.Id))}> {e.Like}</h4>
                                         </div>
                                     </li>
                                 ))}
@@ -143,7 +143,7 @@ export default class DiscoverPage extends Component {
                         <div className="col-sm-5">
                             <div className="about-Discover">
                                 <div className="title-iMusik-Charts">
-                                    <p>About Discover</p>
+                                    <p>About Album</p>
                                 </div>
                                 <div className="info-discover">
                                     <p>
@@ -171,11 +171,11 @@ export default class DiscoverPage extends Component {
                                             <div className="mask">
                                                 <div className="vertical-align">
                                                     <i className="fa fa-play-circle"></i>
-                                                    <h4 style={styles.h4}>Top 10 Songs</h4>
+                                                    <h4 style={styles.h4}>Top 10 New Songs</h4>
                                                 </div>
                                             </div>
                                             <img src="images/banner/songs.jpg" alt="" className="img-responsive" width="100%"/>
-                                            <span className="new-song">Top 10 Songs</span>
+                                            <span className="new-song">Top 10 New Songs</span>
                                             </a>
                                         </div>
                                     </div>
@@ -185,11 +185,11 @@ export default class DiscoverPage extends Component {
                                             <div className="mask">
                                                 <div className="vertical-align">
                                                     <i className="fa fa-play-circle"></i>
-                                                    <h4 style={styles.h4}>Top 10 Discovers</h4>
+                                                    <h4 style={styles.h4}>Top 10 Albums</h4>
                                                 </div>
                                             </div>
                                             <img src="images/banner/discover.jpg" alt="" className="img-responsive" height="50%"/>
-                                            <span className="new-song">Top 10 Discovers</span>
+                                            <span className="new-song">Top 10 Albums</span>
                                             </a>
                                         </div>
                                     </div>

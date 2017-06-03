@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <base href="../">
+    <base href="https://imusik.herokuapp.com">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,38 +17,38 @@
         .contact-form {
             margin-top: 15px;
         }
-
+        
         .contact-form .textarea {
             min-height: 220px;
             resize: none;
         }
-
+        
         .form-control {
             box-shadow: none;
             border-color: #eee;
             height: 49px;
         }
-
+        
         .form-control:focus {
             box-shadow: none;
             border-color: #0366d6;
         }
-
+        
         .form-control-feedback {
             line-height: 50px;
         }
-
+        
         .main-btn {
             background: #0366d6;
             border-color: #0366d6;
             color: #fff;
         }
-
+        
         .main-btn:hover {
             background: #00a491;
             color: #fff;
         }
-
+        
         .form-control-feedback {
             line-height: 50px;
             top: 0px;
@@ -73,7 +73,10 @@
                     }
                 }
                 var idDiscover = $('#IdD').val()
-                var thamso = {'ten': txt, 'idDiscover': idDiscover}
+                var thamso = {
+                    'ten': txt,
+                    'idDiscover': idDiscover
+                }
                 console.log(thamso)
                 $('#timnhac').val(txt)
                 $.post(`/Dashboard/timnhac`, thamso, data => {
@@ -108,8 +111,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <input type="text" class="form-control" name="Name" autocomplete="off" id="Name" placeholder="Name" value="<%=e.NameD%>"
-                                />
+                                <input type="text" class="form-control" name="Name" autocomplete="off" id="Name" placeholder="Name" value="<%=e.NameD%>" />
                             </div>
                         </div>
                     </div>
@@ -124,7 +126,7 @@
                         <div class="col-xs-12">
                             <label>Thêm Bài Hát: </label>
                             <div class="timkiem">
-                                <input type="text" class="form-control input-tim"  name="IdDiscover" id="IdD" value="<%=e.IdD%>" style="display: none">
+                                <input type="text" class="form-control input-tim" name="IdDiscover" id="IdD" value="<%=e.IdD%>" style="display: none">
                                 <input type="text" class="form-control input-tim" placeholder="Nhập tên bài hát..." name="ten" id="timnhac" value="">
                             </div>
                             <ul id="ul-song" class="col-xs-12" style="list-style-type: none; padding-top: 10px">

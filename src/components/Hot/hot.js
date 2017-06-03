@@ -5,8 +5,8 @@ const Hot = () => (
     <div className="hot-trending">
             <div className="container">
                 <div className="row">
-                    <div className="col-xs-12">
-                        <div className="title-hot-trending text-center">
+                    <div className="col-xs-12" style={{paddingTop: 50}}>
+                        <div className="title-hot-trending">
                             <h2>Charts</h2>
                             <p>Based On Artists Everyone Listened</p>
                         </div>
@@ -14,18 +14,18 @@ const Hot = () => (
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-sm-6"  style={{marginTop: 20}}>
+                    <div className="col-sm-6" style={{marginTop: 20}}>
                         <div className="area">
-                            <a href to="/hot/1">
+                            <a href="/hot/1">
                             <div className="mask">
                                 <div className="vertical-align">
                                     <i className="fa fa-play-circle"></i>
                                     <p>Play Now</p>
-                                    <h4 style={styles.h4}>Top 10 Songs</h4>
+                                    <h4 style={styles.h4}>Top 10 New Songs</h4>
                                 </div>
                             </div>
                             <img src="images/banner/songs.jpg" alt="" className="img-responsive" width="100%"/>
-                            <span className="new-song">Top 10 Songs</span>
+                            <span className="new-song">Top 10 New Songs</span>
                             </a>
                         </div>
                     </div>
@@ -36,11 +36,11 @@ const Hot = () => (
                                 <div className="vertical-align">
                                     <i className="fa fa-play-circle"></i>
                                     <p>Play Now</p>
-                                    <h4 style={styles.h4}>Top 10 Discovers</h4>
+                                    <h4 style={styles.h4}>Top 10 Albums</h4>
                                 </div>
                             </div>
                             <img src="images/banner/discover.jpg" alt="" className="img-responsive" height="50%"/>
-                            <span className="new-song">Top 10 Discovers</span>
+                            <span className="new-song">Top 10 Albums</span>
                             </a>
                         </div>
                     </div>

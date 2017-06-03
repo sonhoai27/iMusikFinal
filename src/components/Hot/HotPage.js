@@ -6,6 +6,7 @@ import OneDiscover from "../../components/Discover/OneDiscover"
 import getHotSong from "../../api/getHotSong"
 import Player from "../Player/player"
 import updateLikeSong from '../../api/updateLikeOfSong'
+import GetTopNewSong from "../../api/GetTopNewSong"
 
 export default class HotPage extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ export default class HotPage extends Component {
                 })
             console.log("2")
         } else {
-            getHotSong()
+            GetTopNewSong()
                 .then(arr => {
                     this.setState({
                         mang: arr,
@@ -58,9 +59,9 @@ export default class HotPage extends Component {
         })
     }
     updateLikeSong(id) {
-        $.get('/getDiscover/updateLikeSong/' + id, data => {
+        $.get('/api/updateLikeSong/' + id, data => {
             var a = data - 1
-            $('#like-song' + a).html(data)
+            $('#like-song' + id).html(data)
         })
 
     }
@@ -73,12 +74,12 @@ export default class HotPage extends Component {
             ClickTrack={this.state.ClickTrack}
 
         /> : ""
-        const showNameHotPage = this.props.idHotPage == 1 ? "Top 10 Songs" : "Top 10 Discovers"
+        const showNameHotPage = this.props.idHotPage == 1 ? "Top 10 New Songs" : "Top 10 Discovers"
         const showBanner = this.props.idHotPage == 1 ? <Banner
-            Name="Top 10 Songs"
+            Name="Top 10 New Songs"
             ButtonEvent="Share"
         /> : <Banner
-                Name="Top 10 Discover"
+                Name="Top 10 Albums"
                 ButtonEvent="Share"
             />
 
@@ -100,7 +101,7 @@ export default class HotPage extends Component {
                             <h4><b>{e.Name}</b></h4>
                         </div>
                         <div className="luot-nghe">
-                            <h4 className="fa fa-thumbs-up" id={'like-song' + e.Like} aria-hidden="true" onClick={() => this.updateLikeSong(e.Id)}> {e.Like}</h4>
+                            <h4 className="fa fa-thumbs-up" id={'like-song' + e.Id} aria-hidden="true" onClick={() => this.updateLikeSong(e.Id)}> {e.Like}</h4>
                         </div>
                     </li>
                 ))}
@@ -123,10 +124,10 @@ export default class HotPage extends Component {
         return (
             <div>
                 {showBanner}
-                <div className="container">
+                <div className="container" >
                     <div className="row">
                         <div className="col-sm-12">
-                            <div className="title-popular-artists text-center">
+                            <div className="title-popular-artists" style={{paddingTop: 20}}>
                                 <h2>{showNameHotPage}</h2>
                                 <p>Based On Artists Everyone Listened</p>
                             </div>
@@ -140,32 +141,32 @@ export default class HotPage extends Component {
                                 <div className="title-iMusik-Charts">
                                     <p>iMusik Charts</p>
                                 </div>
-                                <div className="show-Charts col-xs-12" style={{marginTop: 20}}>
+                                <div className="show-Charts col-xs-12">
                                     <div className="col-xs-12">
                                         <div className="area">
                                             <a href="/hot/1">
                                                 <div className="mask">
                                                     <div className="vertical-align">
                                                         <i className="fa fa-play-circle"></i>
-                                                        <h4 style={styles.h4}>Top 10 Songs</h4>
+                                                        <h4 style={styles.h4}>Top 10 New Songs</h4>
                                                     </div>
                                                 </div>
                                                 <img src="images/banner/songs.jpg" alt="" className="img-responsive" width="100%" />
-                                                <span className="new-song">Top 10 Songs</span>
+                                                <span className="new-song">Top 10 New Songs</span>
                                             </a>
                                         </div>
                                     </div>
-                                    <div className="col-xs-12" style={{marginTop: 20}}>
+                                    <div className="col-xs-12" style={{marginTop: 20, marginBottom: 20}}>
                                         <div className="area">
                                             <a href="/hot/2">
                                                 <div className="mask">
                                                     <div className="vertical-align">
                                                         <i className="fa fa-play-circle"></i>
-                                                        <h4 style={styles.h4}>Top 10 Discovers</h4>
+                                                        <h4 style={styles.h4}>Top 10 Albums</h4>
                                                     </div>
                                                 </div>
                                                 <img src="images/banner/discover.jpg" alt="" className="img-responsive" height="50%" />
-                                                <span className="new-song">Top 10 Discovers</span>
+                                                <span className="new-song">Top 10 Albums</span>
                                             </a>
                                         </div>
                                     </div>

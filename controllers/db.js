@@ -140,6 +140,14 @@ const AddNewSong = (Name, Desc, Image, Link, idCaSi, Like) => {
 	.catch(err => console.log(err + ''))
 }
 
+const GetTopNewSong = ()=> {
+	const sql = `select * from "Song" order by "Id" DESC limit 10`
+	return queryDB(sql, [])
+	.then(result => result.rows)
+	.catch(err => console.log(err + ''))
+}
+
+
 const LayCaSi = () => (
 	queryDB(`select * from "Singer"`)
 	.then(result => result.rows)
@@ -172,7 +180,7 @@ const getHotSong= () => {
 }
 
 const getHotSinger = () => {
-	const sql = `select * from "Singer" where "LikeS" >= 10 limit 4`
+	const sql = `select * from "Singer" where "LikeS" >= 8 limit 6`
 	return queryDB(sql, [])
 	.then(result => result.rows)
 	.catch(err => console.log(err))
@@ -215,21 +223,19 @@ module.exports = {
 	DangNhap,
 	queryDB,
 	layTen,
-	LayDiscover,
-	ThemDiscover,
-	IdDiscoverCuoi,
-	UpdateIdDiscoverOfSong,
-	LayRaBaiHat,
-	LayCaSi,
 	layMotDiscover,
 	DeleteDiscover,
 	UpdateDiscover,
+	LayDiscover,
+	ThemDiscover,
+	IdDiscoverCuoi,
 	getSongFromDiscover,
 	updateLikeSong,
 	getHotDiscover,
 	getHotSong,
 	getHotSinger,
 	getOneSinger,
+	LayCaSi,
 	getSongOfSinger,
 	LayDiscoverOfSinger,
 	SearchDiscover,
@@ -237,7 +243,8 @@ module.exports = {
 	UpdateInfoSong,
 	GetAllSong,
 	GetOneSong,
-	AddNewSong
+	AddNewSong,
+	GetTopNewSong,
+	UpdateIdDiscoverOfSong,
+	LayRaBaiHat,
 }
-//xu ly phan dang ky dang nhap, admin page, like discover, chuyen doi get sang post. su dung ajax
-//admin page su dung thuan html/css/jquery.
